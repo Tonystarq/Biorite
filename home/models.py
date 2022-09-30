@@ -116,9 +116,21 @@ class Verify(models.Model):
         return self.name
 
 class ContactForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for field in self.Meta.required:
+            self.fields[field].required = True
     class Meta:
         model = ContactMessage
         fields = ['name', 'email','phone', 'subject','message']
+        required = (
+            'name',
+            'email',
+            'phone',
+            'subject',
+            'message',
+        )
         widgets = {
             'name'   : TextInput(attrs={'class': 'input','placeholder':'Full Name'}),
             'subject' : TextInput(attrs={'class': 'input','placeholder':'Subject'}),
@@ -128,11 +140,22 @@ class ContactForm(ModelForm):
         }
 
 class VerifyForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for field in self.Meta.required:
+            self.fields[field].required = True
     class Meta:
         model = Verify
         fields = ['name', 'email','phone', 'code']
+        required = (
+            'name',
+            'email',
+            'phone',
+            'code',
+        )
         widgets = {
-            'name'   : TextInput(attrs={'class': 'input','placeholder':'Full Name'}),
+            'name'   : TextInput(attrs={'class': 'input','placeholder':'Full Name',}),
             'email'   : TextInput(attrs={'class': 'input','type':'email','placeholder':'Email Address'}),
             'phone'   : TextInput(attrs={'class': 'input','type':'number','placeholder':'Phone Number'}),
             'code' : TextInput(attrs={'class': 'input','placeholder':'Authentication Code'}),

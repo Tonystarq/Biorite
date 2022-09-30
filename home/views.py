@@ -90,7 +90,7 @@ def verify(request):
             data.code = form.cleaned_data['code']
             data.ip = request.META.get('REMOTE_ADDR')
             data.save()  #save data to table
-            messages.success(request,"Your Autentication has ben recorded. Thank you for your Authenticate our product.")
+            messages.success(request,"Congrtulations!!!! This product is original. Your Autentication has been recorded. Thank you for your Authenticate our product.")
             return HttpResponseRedirect('/verify')
     form = VerifyForm
     context={'form':form  }
