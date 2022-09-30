@@ -1,0 +1,43 @@
+{% extends 'homebase.html' %}
+{% load i18n %}
+{% block title %} About Us- {{ setting.title }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+{% load static %}
+{% block sidebar %} {% include 'sidebar.html' %} {% endblock %}
+
+{% block body %}
+
+	<!-- BREADCRUMB -->
+	<div id="breadcrumb">
+		<div class="container">
+			<ul class="breadcrumb">
+                <li><a href="{% url 'home' %}">{% trans "Home" %}</a></li>
+                <li class="active">{% trans "About Us" %}</li>
+			</ul>
+		</div>
+	</div>
+	<!-- /BREADCRUMB -->
+
+	<!-- section -->
+	<div class="section">
+		<!-- container -->
+		<div class="container">
+			<!-- row -->
+			
+			<!-- <img  src="{% static '' %}img/" id="igqme" class="person-img"/> -->
+			<div class="row">
+				<center><video height="240" controls>
+					<source src="{% static '' %}img/logo_mp.mp4" type="video/mp4">
+				  </video></center>
+                {{ setting.aboutus|safe }}
+				
+			</div>
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+		
+	</div>
+	<!-- /section -->
+
+{% endblock %}

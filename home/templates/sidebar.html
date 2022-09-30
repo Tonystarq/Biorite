@@ -1,0 +1,100 @@
+{% load static %}
+{% load i18n %}
+<!-- NAVIGATION -->
+<div id="navigation" style="background-color:#000000">
+        <div id="responsive-nav">
+            <!-- category nav -->
+            {% if page %}
+                <div class="category-nav">
+            {% else %}
+                <div class="category-nav show-on-click">
+            {% endif %}
+
+            
+
+
+            {% load myapptags %}
+            {% if LANGUAGE_CODE is None %}
+                {% get_current_language as LANGUAGE_CODE %}
+                {% categoryTree 0 '' LANGUAGE_CODE as category %}
+            {% else %}
+                {% categoryTree 0 '' 'en' as category %}
+            {% endif %}
+
+
+            
+
+            </div>
+        
+            <!-- /category nav -->
+            <div class="container">
+            <!-- menu nav -->
+            <div class="menu-nav">
+                <span class="menu-header">Menu <i class="fa fa-bars"></i></span>
+                <ul class="menu-list">
+                    <li></li>
+                    <li></li>
+                    <li><a href="{% url 'home' %}" style="font-size: 20px;">{% trans "Home" %}</a></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li ><a href="{% url 'category_list' %}" style="font-size: 20px;"> {% trans "Category" %}</a> </li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li><a href="{% url 'shopnow' %}" style="font-size: 20px;">{% trans "Shop Now" %}</a></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li><a href="{% url 'blog' %}" style="font-size: 20px;">{% trans "Blog" %}</a></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li><a href="{% url 'faq' %}" style="font-size: 20px;">{% trans "FAQ" %}</a></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li><a href="{% url 'verify' %}" style="font-size: 20px;">{% trans "Verify" %}</a></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li><a href="{% url 'aboutus' %}" style="font-size: 20px;">{% trans "About Us" %}</a></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li><a href="{% url 'contactus' %}" style="font-size: 20px;">{% trans "Contact Us" %}</a></li>
+                   
+
+                </ul>
+            </div>
+        </div>
+            <!-- menu nav -->
+            </div>
+        
+    </div>
+    <div style="background-color:#000000">
+        <div class="container" style="background-color:#000000">
+            <img  src="{% static '' %}img/123.jpg" id="i42h8" class="person-img"/>
+        </div>
+    
+    
+    </div>
+    
+    <!-- /NAVIGATION -->
