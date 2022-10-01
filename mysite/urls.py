@@ -65,4 +65,4 @@ urlpatterns += i18n_patterns(
     path('shopnow/', views.shopnow, name='shopnow'),
     path('newsletter/', views.newsletter, name='newsletter'),
     prefix_default_language=False,
-)+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+)+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)+static(settings.STATIC_URL,document_root = settings.STATIC_ROOT)

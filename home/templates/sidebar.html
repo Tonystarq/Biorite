@@ -91,7 +91,15 @@
     </div>
     <div style="background-color:#000000">
         <div class="container" style="background-color:#000000">
-            <img  src="{% static '' %}img/123.jpg" id="i42h8" class="person-img"/>
+            <div class="menu-nav">
+            <ul class="menu-list">
+            <li><a href="{% url 'contactus' %}" style="font-size: 20px;">{% trans "Quality Guaranteed" %}</a></li>
+            <li><a href="{% url 'contactus' %}" style="font-size: 20px;">{% trans "100% Original Product " %}</a></li>
+            <li><a href="{% url 'contactus' %}" style="font-size: 20px;">{% trans "Delivery Pan India" %}</a></li>
+            <li><a href="{% url 'contactus' %}" style="font-size: 20px;">{% trans "Ask Our Experts: +91 9999531838" %}</a></li>
+        </ul>
+    </div>
+            <!-- <img  src="{% static '' %}img/123.jpg" id="i42h8" class="person-img"/> -->
         </div>
     
     
