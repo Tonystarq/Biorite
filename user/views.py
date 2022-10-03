@@ -75,6 +75,7 @@ def signup_form(request):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password1')
             email = form.cleaned_data.get("email")
+            phone = form.cleaned_data.get("phone")
             first_name = form.cleaned_data.get("first_name")
             last_name = form.cleaned_data.get("last_name")
             
@@ -87,6 +88,7 @@ def signup_form(request):
                 if User.objects.filter(email = email).first():
                     messages.success(request, 'Email is taken.')
                     return HttpResponseRedirect('/signup')
+                
 
                 auth_token = str(uuid.uuid4())
                 send_mail_after_registration(email , auth_token)             
@@ -95,14 +97,15 @@ def signup_form(request):
                 user_obj.save()
                 
                    
-                profile_obj = UserProfile.objects.create(user = user_obj , auth_token = auth_token)
+                profile_obj = UserProfile.objects.create(user = user_obj ,phone = phone, auth_token = auth_token)
                 profile_obj.save()
                 
                 messages.success(request, 'Mail has been sent for confirmation!')
                 messages.success(request, 'Please check Spam Section of Mail as well!')
                 
                 
-                return HttpResponseRedirect('/')
+                return HttpResponseRedirect('/signup')
+                
                 
 
             except Exception as e:
@@ -249,7 +252,7 @@ def user_verify(request , auth_token):
 
 def send_mail_after_registration(email , token):
     subject = 'Your accounts need to be verified'
-    message = f'Hi paste the link to verify your account http://127.0.0.1:8000/verify/{token}'
+    message = f'Hi paste the link to verify your account http://bioritehealthcare.com/verify/{token}'
     email_from = settings.EMAIL_HOST_USER
     recipient_list = [email]
     send_mail(subject, message , email_from ,recipient_list )
