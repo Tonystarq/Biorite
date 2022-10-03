@@ -26,7 +26,7 @@ def index(request):
         request.session['currency'] = settings.DEFAULT_CURRENCY
 
     setting = Setting.objects.get(pk=1)
-    products_latest = Product.objects.all().order_by('-id')[:4]  # last 4 products
+    products_latest = Product.objects.all().order_by('id')[:4]  # last 4 products
     # >>>>>>>>>>>>>>>> M U L T I   L A N G U G A E >>>>>> START
     defaultlang = settings.LANGUAGE_CODE[0:2]
     currentlang = request.LANGUAGE_CODE[0:2]
@@ -38,7 +38,7 @@ def index(request):
             'FROM product_product as p '
             'LEFT JOIN product_productlang as l '
             'ON p.id = l.product_id '
-            'WHERE  l.lang=%s ORDER BY p.id DESC LIMIT 4', [currentlang])
+            'WHERE  l.lang=%s ORDER BY p.id ASC LIMIT 4', [currentlang])
 
     products_slider = Banner.objects.all() 
 
@@ -90,7 +90,7 @@ def verify(request):
             data.code = form.cleaned_data['code']
             data.ip = request.META.get('REMOTE_ADDR')
             data.save()  #save data to table
-            messages.success(request,"Congrtulations!!!! This product is original. Your Autentication has been recorded. Thank you for your Authenticate our product.")
+            messages.success(request,"Your Autentication has ben recorded. Thank you for your Authenticate our product.")
             return HttpResponseRedirect('/verify')
     form = VerifyForm
     context={'form':form  }

@@ -122,9 +122,9 @@ def orderproduct(request):
     Discount=0
     
     if couponcode:
-        print("COUPONCODE ", couponcode,category)
+        print("COUPONCODE ", couponcode)
         try:
-            coupon = CouponCode.objects.get(category=category, code=couponcode)
+            coupon = CouponCode.objects.get(code=couponcode)
             print(coupon,total,coupon.discount)
             Discount = int(total) * int(coupon.discount) * 0.01
             amount = int(total) - int(Discount)

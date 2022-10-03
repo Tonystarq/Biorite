@@ -1,4 +1,4 @@
-from tkinter import HIDDEN
+
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth.models import User
 from django.db import models

@@ -33,25 +33,26 @@ def login_form(request):
         user = authenticate(request, username=username, password=password)
         user_obj = User.objects.filter(username = username).first()
         profile_obj = UserProfile.objects.filter(user = user_obj ).first()
-        if not profile_obj.is_verified:
-            messages.success(request, 'Profile is not verified check your mail.')
-            return HttpResponseRedirect('/login')
-        else:
-            if user is not None:
-                login(request, user)
-                current_user =request.user
-                userprofile=UserProfile.objects.get(user_id=current_user.id)
-                request.session['userimage'] = userprofile.image.url
-                #*** Multi Langugae
-                request.session[translation.LANGUAGE_SESSION_KEY] = userprofile.language.code
-                request.session['currency'] = userprofile.currency.code
-                translation.activate(userprofile.language.code)
-
-                # Redirect to a success page.
-                return HttpResponseRedirect('/'+userprofile.language.code)
-            else:
-                messages.warning(request,"Login Error !! Username or Password is incorrect")
+        if user is not None:
+            if not profile_obj.is_verified:
+                messages.success(request, 'Profile is not verified check your mail.')
                 return HttpResponseRedirect('/login')
+            else:
+                
+                    login(request, user)
+                    current_user =request.user
+                    userprofile=UserProfile.objects.get(user_id=current_user.id)
+                    request.session['userimage'] = userprofile.image.url
+                    #*** Multi Langugae
+                    request.session[translation.LANGUAGE_SESSION_KEY] = userprofile.language.code
+                    request.session['currency'] = userprofile.currency.code
+                    translation.activate(userprofile.language.code)
+
+                    # Redirect to a success page.
+                    return HttpResponseRedirect('/'+userprofile.language.code)
+        else:
+            messages.warning(request,"Login Error !! Username or Password is incorrect")
+            return HttpResponseRedirect('/login')
     # Return an 'invalid login' error message.
 
     #category = Category.objects.all()
@@ -61,9 +62,9 @@ def login_form(request):
 
 def logout_func(request):
     logout(request)
-    if translation.LANGUAGE_SESSION_KEY in request.session:
-        del request.session[translation.LANGUAGE_SESSION_KEY]
-        del request.session['currency']
+    # if translation.LANGUAGE_SESSION_KEY in request.session:
+    #     del request.session[translation.LANGUAGE_SESSION_KEY]
+    #     del request.session['currency']
     return HttpResponseRedirect('/')
 
 
@@ -101,7 +102,7 @@ def signup_form(request):
                 messages.success(request, 'Please check Spam Section of Mail as well!')
                 
                 
-                return HttpResponseRedirect('/signup')
+                return HttpResponseRedirect('/')
                 
 
             except Exception as e:
@@ -248,7 +249,7 @@ def user_verify(request , auth_token):
 
 def send_mail_after_registration(email , token):
     subject = 'Your accounts need to be verified'
-    message = f'Hi paste the link to verify your account http://bioritehealthcare.com/verify/{token}'
+    message = f'Hi paste the link to verify your account http://127.0.0.1:8000/verify/{token}'
     email_from = settings.EMAIL_HOST_USER
     recipient_list = [email]
     send_mail(subject, message , email_from ,recipient_list )

@@ -216,7 +216,16 @@
         "handler": function (response){
             alert(response.razorpay_payment_id);
             alert(response.razorpay_order_id);
-            alert(response.razorpay_signature)
+            alert(response.razorpay_signature);
+            $.ajax({
+                method:"POST",
+                url:"orderproduct",
+                data:"data",
+                dataType:"dataType",
+                success:function(response){
+
+                }
+            });
         },
         "prefill": {
             "name": "{{user.first_name}}",
