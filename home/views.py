@@ -348,3 +348,9 @@ def newsletter(request):
         Newslatter=Newsletter(email=email,phone_number=phone)
         Newslatter.save()
     return HttpResponseRedirect(lasturl)
+
+
+def more(request):
+    
+    return render(request,'more.html')
+

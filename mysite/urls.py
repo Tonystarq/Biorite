@@ -64,5 +64,6 @@ urlpatterns += i18n_patterns(
     path('ajaxcolor/', views.ajaxcolor, name='ajaxcolor'),
     path('shopnow/', views.shopnow, name='shopnow'),
     path('newsletter/', views.newsletter, name='newsletter'),
+    path('more/', views.more, name='more'),
     prefix_default_language=False,
 )+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
