@@ -361,6 +361,7 @@ textarea.input {
 
 .header-search>form {
   position: relative;
+  border-style: solid;
 }
 
 .header-search>form .search-input {
