@@ -354,3 +354,18 @@ def more(request):
     
     return render(request,'more.html')
 
+def PrivacyPolicies(request):
+    
+    return render(request,'PrivacyPolicies.html')
+
+def Refund(request):
+    
+    return render(request,'Refund.html')
+
+def TermsandConditions(request):
+    
+    return render(request,'TermsandConditions.html')
+
+def ShippingandDeliveryPolicies(request):
+    
+    return render(request,'ShippingandDeliveryPolicies.html')
