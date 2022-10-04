@@ -1,3 +1,4 @@
+import json
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
@@ -124,7 +125,7 @@ def orderproduct(request):
     if couponcode:
         print("COUPONCODE ", couponcode)
         try:
-            coupon = CouponCode.objects.get(code=couponcode)
+            coupon = CouponCode.objects.get( code=couponcode)
             print(coupon,total,coupon.discount)
             Discount = int(total) * int(coupon.discount) * 0.01
             amount = int(total) - int(Discount)
@@ -133,7 +134,7 @@ def orderproduct(request):
             coupon_code_message = 'invalid Coupon Code'
             print('coupon code invalid')
     
-    client = razorpay.Client(auth=("rzp_live_LJlCUJLueC7wUe", "OK29juNOoBsgPFxSQrA8eTdX"))
+    client = razorpay.Client(auth=("rzp_test_iQIsh0VW0lv0GZ", "QMZlNtNqUuECuTa7ajyJytTh"))
 
     data = { "amount": int(amount)*100, "currency": "INR" ,"payment_capture":1}
     payment_order=client.order.create(data=data)
@@ -142,18 +143,14 @@ def orderproduct(request):
     if request.method == 'POST':  # if there is a post
         
         
-        form = OrderForm(request.POST)
-        #return HttpResponse(request.POST.items())
-        if form.is_valid():
-            # Send Credit card to bank,  If the bank responds ok, continue, if not, show the error
-            # ..............
+            # form = OrderForm(request.POST)
 
             data = Order()
-            data.first_name = form.cleaned_data['first_name'] #get product quantity from form
-            data.last_name = form.cleaned_data['last_name']
-            data.address = form.cleaned_data['address']
-            data.city = form.cleaned_data['city']
-            data.phone = form.cleaned_data['phone']
+            data.first_name = request.POST.get('first_name') #get product quantity from form
+            data.last_name = request.POST.get('last_name')
+            data.address =  request.POST.get('address')
+            data.city =  request.POST.get('city')
+            data.phone = request.POST.get('phone')
             data.user_id = current_user.id
             data.total = amount
             data.ip = request.META.get('REMOTE_ADDR')
@@ -184,15 +181,14 @@ def orderproduct(request):
                     variant = Variants.objects.get(id=rs.variant.id)
                     variant.quantity -= rs.quantity
                     variant.save()
+                
                 #************ <> *****************
 
             ShopCart.objects.filter(user_id=current_user.id).delete() # Clear & Delete shopcart
             request.session['cart_items']=0
             messages.success(request, "Your Order has been completed. Thank you ")
             return render(request, 'Order_Completed.html',{'ordercode':ordercode,'category': category})
-        else:
-            messages.warning(request, form.errors)
-            return HttpResponseRedirect("/order/orderproduct")
+        
 
     form= OrderForm()
     profile = UserProfile.objects.get(user_id=current_user.id)
@@ -210,6 +206,12 @@ def orderproduct(request):
              "razorpay_amount":amount*100,
                }
     return render(request, 'Order_Form.html', context)
+
+
+
+def ordercomplete(request):
+
+    return render(request, 'Order_Completed.html')
 
 
 
