@@ -171,11 +171,11 @@ CKEDITOR_CONFIGS = {
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp-mail.outlook.com'
-EMAIL_PORT = 25
-EMAIL_HOST_USER = "bioritehealthcare@hotmail.com"
-DEFAULT_FROM_EMAIL = "bioritehealthcare@hotmail.com"
-EMAIL_HOST_PASSWORD = 'Biorite$123'
+EMAIL_HOST = 'mail.bioritehealthcare.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "admin@bioritehealthcare.com"
+DEFAULT_FROM_EMAIL = "mail.bioritehealthcare.com"
+EMAIL_HOST_PASSWORD = 'Healthcare**1'
 
 ###################################
 
