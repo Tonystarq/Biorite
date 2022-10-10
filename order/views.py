@@ -134,7 +134,7 @@ def orderproduct(request):
             coupon_code_message = 'invalid Coupon Code'
             print('coupon code invalid')
     
-    client = razorpay.Client(auth=("rzp_test_iQIsh0VW0lv0GZ", "QMZlNtNqUuECuTa7ajyJytTh"))
+    client = razorpay.Client(auth=("rzp_live_LJlCUJLueC7wUe", "OK29juNOoBsgPFxSQrA8eTdX"))
 
     data = { "amount": int(amount)*100, "currency": "INR" ,"payment_capture":1}
     payment_order=client.order.create(data=data)

@@ -354,6 +354,10 @@ def more(request):
     
     return render(request,'more.html')
 
+def sitemap(request):
+    
+    return render(request,'sitemap.xml')
+
 def PrivacyPolicies(request):
     
     return render(request,'PrivacyPolicies.html')

@@ -20,7 +20,7 @@ $('.PayWithRazorpay').click(function(e){
     else{
         console.log(amount)
     var options = {
-        "key": "rzp_test_iQIsh0VW0lv0GZ", // Enter the Key ID generated from the Dashboard
+        "key": "rzp_live_LJlCUJLueC7wUe", // Enter the Key ID generated from the Dashboard
         "amount": amount * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
         "currency": "INR",
         "name": "Biorite Healthcare",
